@@ -18,18 +18,18 @@ resource "aws_security_group" "main" {
 
   ingress {
     description = "APP"
-    cidr_ipv4   = var.sg_ingress_cidr
     from_port   = var.sg_port
-    ip_protocol = "http"
     to_port     = var.sg_port
+    protocol    = "tcp"
+    cidr_blocks = var.sg_ingress_cidr
   }
-
 
   egress {
-    cidr_ipv4   = "0.0.0.0/0"
-    ip_protocol = "-1" # semantically equivalent to all ports
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
-
 }
 
 
